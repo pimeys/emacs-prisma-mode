@@ -1,5 +1,7 @@
 # emacs-prisma-mode
-A quick and dirty emacs major mode for Prisma schemas
+A quick and dirty emacs major mode for Prisma schemas.
+
+P.S. I have quite limited time for this, so I'd be happy for good pull requests if needing features!
 
 ## Yes :)
 - Syntax hilighting
