@@ -22,14 +22,22 @@
              ;; We match `model Album {', but hilight only the word `model'.
              ;; Same rules for `enum`, `datasource` and `type'.
              (x-keywords-regexp "^\s*\\(model\\|enum\\|datasource\\|type\\)\s+[a-zA-Z0-9_-]+\s*{")
+             ;; Mathces the column name and type, hilighting the type.
              (x-scalar-types-regexp "^\s+[a-zA-Z0-9_-]+\s+\\(Int\\|String\\|Boolean\\|DateTime\\|Float\\|Decimal\\|FJson\\)")
+             ;; A field attribute, such as `@id' or `@map', comes after the column type.
              (x-field-attributes-regexp "\@\\(id\\|map\\|default\\|relation\\|unique\\|index\\|ignore\\)")
+             ;; A block attribute, usually at the end of a block such as model definition.
+             ;; Example: `@@id([user_name, email])'
              (x-block-attributes-regexp "\@@\\(id\\|map\\|default\\|relation\\|unique\\|index\\|ignore\\)")
+             ;; A native type definition, such as `@db.VarChar(255)'
              (x-native-types-regexp "\@[a-zA-Z0-9_-]+\.[a-zA-Z]+")
+             ;; Properties in an attribute, e.g. `fields: [MediaTypeId]'.
              (x-properties-regexp "[a-zA-Z_-]+:")
+             ;; An attribute function, given as a parameter between parentheses. E.g. `autoincrement()'
              (x-attribute-functions-regexp "[(]\s*\\(autoincrement\\|cuid\\|uuid\\|now\\|dbgenerated\\)\(\)\s*[)]")
              )
         `(
+          ;; order matters
           (,x-block-attributes-regexp . font-lock-preprocessor-face)
           (,x-field-attributes-regexp . font-lock-preprocessor-face)
           (,x-attribute-functions-regexp . (1 font-lock-function-name-face))
