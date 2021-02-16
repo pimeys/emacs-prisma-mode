@@ -23,7 +23,7 @@
              ;; Same rules for `enum`, `datasource` and `type'.
              (x-keywords-regexp "^\s*\\(model\\|enum\\|datasource\\|type\\)\s+[a-zA-Z0-9_-]+\s*{")
              ;; Mathces the column name and type, hilighting the type.
-             (x-scalar-types-regexp "^\s+[a-zA-Z0-9_-]+\s+\\(Int\\|String\\|Boolean\\|DateTime\\|Float\\|Decimal\\|FJson\\)")
+             (x-scalar-types-regexp "^\s+[a-zA-Z0-9_-]+\s+\\(Int\\|String\\|Boolean\\|DateTime\\|Float\\|Decimal\\|Json\\)")
              ;; A field attribute, such as `@id' or `@map', comes after the column type.
              (x-field-attributes-regexp "\@\\(id\\|map\\|default\\|relation\\|unique\\|index\\|ignore\\)")
              ;; A block attribute, usually at the end of a block such as model definition.
