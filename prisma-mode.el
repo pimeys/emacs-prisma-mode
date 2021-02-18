@@ -54,4 +54,6 @@
   (setq tab-width 2)
   (setq font-lock-defaults '((prisma-font-lock-keywords))))
 
+(add-to-list 'auto-mode-alist '("\\.prisma$" . prisma-mode))
+
 (provide 'prisma-mode)
