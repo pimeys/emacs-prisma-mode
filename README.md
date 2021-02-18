@@ -16,10 +16,6 @@ I'm using [doom-emacs](https://github.com/hlissner/doom-emacs), so to have the m
 
 ```elisp
 (load "~/.doom.d/emacs-prisma-mode/prisma-mode.el")
-(require 'prisma-mode)
-
-(setq auto-mode-alist
-      (cons '("\\.prisma$" . prisma-mode) auto-mode-alist))
 ```
 
 ## Screenshot
