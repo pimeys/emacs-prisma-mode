@@ -19,9 +19,9 @@
 
 (setq prisma-font-lock-keywords
       (let* (
-             ;; We match `model Album {', but hilight only the word `model'.
+             ;; We match `model Album {', and highlight `model' as keyword and `Album' as type.
              ;; Same rules for `enum`, `datasource` and `type'.
-             (x-keywords-regexp "^\s*\\(model\\|enum\\|datasource\\|type\\)\s+[a-zA-Z0-9_-]+\s*{")
+             (x-keywords-regexp "^\s*\\(model\\|enum\\|datasource\\|generator\\|type\\)\s+\\([a-zA-Z0-9_-]\\)+\s*{")
              ;; Mathces the column name and type, hilighting the type.
              (x-scalar-types-regexp "^\s+[a-zA-Z0-9_-]+\s+\\(Int\\|String\\|Boolean\\|DateTime\\|Float\\|Decimal\\|Json\\)")
              ;; A field attribute, such as `@id' or `@map', comes after the column type.
@@ -42,7 +42,7 @@
           (,x-field-attributes-regexp . font-lock-preprocessor-face)
           (,x-attribute-functions-regexp . (1 font-lock-function-name-face))
           (,x-native-types-regexp . font-lock-preprocessor-face)
-          (,x-keywords-regexp . (1 font-lock-keyword-face))
+          (,x-keywords-regexp (1 font-lock-keyword-face) (2 font-lock-type-face))
           (,x-properties-regexp . font-lock-variable-name-face)
           (,x-scalar-types-regexp . (1 font-lock-type-face))
           )))
