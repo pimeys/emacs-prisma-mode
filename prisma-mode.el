@@ -33,8 +33,10 @@
              (x-native-types-regexp "\@[a-zA-Z0-9_-]+\.[a-zA-Z]+")
              ;; Properties in an attribute, e.g. `fields: [MediaTypeId]'.
              (x-properties-regexp "[a-zA-Z_-]+:")
-             ;; An attribute function, given as a parameter between parentheses. E.g. `autoincrement()'
-             (x-attribute-functions-regexp "[(]\s*\\(autoincrement\\|cuid\\|uuid\\|now\\|dbgenerated\\)\(\)\s*[)]")
+             ;; Builtin functions. E.g. `autoincrement()'
+             (x-attribute-functions-regexp "\\(autoincrement\\|cuid\\|uuid\\|now\\|env\\|dbgenerated\\)\(\.*\)")
+             ;; Constants
+             (x-constants-regexp "\\(true\\|false\\|null\\)")
              )
         `(
           ;; order matters
@@ -45,6 +47,7 @@
           (,x-keywords-regexp (1 font-lock-keyword-face) (2 font-lock-type-face))
           (,x-properties-regexp . font-lock-variable-name-face)
           (,x-scalar-types-regexp . (1 font-lock-type-face))
+          (,x-constants-regexp . font-lock-constant-face)
           )))
 
 (define-derived-mode prisma-mode js-mode "prisma mode"
