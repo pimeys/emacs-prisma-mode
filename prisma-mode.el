@@ -50,13 +50,16 @@
           (,x-constants-regexp . font-lock-constant-face)
           )))
 
-(define-derived-mode prisma-mode js-mode "prisma mode"
+;;;###autoload
+(define-derived-mode prisma-mode js-mode "Prisma"
   "Major mode for editing Prisma data models."
 
   (setq-default indent-tabs-mode nil)
   (setq tab-width 2)
   (setq font-lock-defaults '((prisma-font-lock-keywords))))
 
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.prisma$" . prisma-mode))
 
 (provide 'prisma-mode)
+;;; prisma-mode.el ends here
