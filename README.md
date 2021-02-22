@@ -24,7 +24,7 @@ I'm using [doom-emacs](https://github.com/hlissner/doom-emacs), so to have the m
 Or, you can also install as package at `~/.doom.d/packages.el`
 
 ```elisp
-(package! another-package :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 ```
 
 ## Screenshot
