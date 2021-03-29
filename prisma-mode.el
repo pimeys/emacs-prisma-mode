@@ -17,6 +17,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'lsp-prisma)
 (setq prisma-font-lock-keywords
       (let* (
              ;; We match `model Album {', and highlight `model' as keyword and `Album' as type.

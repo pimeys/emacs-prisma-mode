@@ -8,9 +8,6 @@ P.S. I have quite limited time for this, so I'd be happy for good pull requests 
 
 - Syntax hilighting
 - Autoindent
-
-## No :(
-
 - LSP
 
 ## Installation
@@ -18,13 +15,13 @@ P.S. I have quite limited time for this, so I'd be happy for good pull requests 
 I'm using [doom-emacs](https://github.com/hlissner/doom-emacs), so to have the mode available I clone the repo to `~/.doom.d/emacs-prisma-mode`, then in `~/.doom.d/config.el` I can set:
 
 ```elisp
-(load "~/.doom.d/emacs-prisma-mode/prisma-mode.el")
+(load! "emacs-prisma-mode/prisma-mode")
 ```
 
 Or, you can also install as package at `~/.doom.d/packages.el`
 
 ```elisp
-(package! another-package :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 ```
 
 ## Screenshot
