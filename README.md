@@ -23,7 +23,11 @@ Or, you can also install as package at `~/.doom.d/packages.el`
 ```elisp
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 ```
+Note: This package requires [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
 
+```elisp
+(package! lsp-mode)
+```
 ## Screenshot
 
 ![All its glory](https://raw.githubusercontent.com/pimeys/emacs-prisma-mode/main/emacs-major-mode.png)
