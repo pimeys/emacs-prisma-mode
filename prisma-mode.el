@@ -7,17 +7,33 @@
 ;; Created: 16 Feb 2021
 ;; Keywords: languages
 ;; Homepage: https://github.com/prisma/emacs-prisma-mode/
+;; Package-Requires: ((emacs "26.1") (js2-mode "20211201.1250"))
 
 ;; This file is not part of GNU Emacs.
 
 ;;; License:
 
-;; You can redistribute this program and/or modify it under the terms of the GNU General Public License version 2.
+;; You can redistribute this program and/or modify it under the terms of the GNU
+;; General Public License version 2.
 
 ;;; Commentary:
+
+;;; Syntax highlight and LSP functionality for the Prisma Schema Language. Using
+;;; the LSP functionality requires the npm package @prisma/language-server to
+;;; be installed in the system, providing prisma-language-server somewhere in
+;;; the path.
+
+;;; Enabling the LSP functionality automatically can be done with a hook:
+;;;   (add-hook 'prisma-mode-hook #'lsp-deferred)
+
+;;; Format can happen automatically on save with following hook:
+;;;   (add-hook 'before-save-hook #'(lambda () (when (eq major-mode 'prisma-mode)
+;;;                                                  (lsp-format-buffer))))
+
 ;;; Code:
 
 (require 'lsp-prisma)
+
 (setq prisma-font-lock-keywords
       (let* (
              ;; We match `model Album {', and highlight `model' as keyword and `Album' as type.
@@ -26,10 +42,10 @@
              ;; Mathces the column name and type, hilighting the type.
              (x-scalar-types-regexp "^\s+[a-zA-Z0-9_-]+\s+\\(Int\\|String\\|Boolean\\|DateTime\\|Float\\|Decimal\\|Json\\|[a-zA-Z0-9_-]+\\)")
              ;; A field attribute, such as `@id' or `@map', comes after the column type.
-             (x-field-attributes-regexp "\@\\(id\\|map\\|default\\|relation\\|unique\\|index\\|ignore\\)")
+             (x-field-attributes-regexp "\@\\(id\\|map\\|default\\|relation\\|unique\\|ignore\\)")
              ;; A block attribute, usually at the end of a block such as model definition.
              ;; Example: `@@id([user_name, email])'
-             (x-block-attributes-regexp "\@@\\(id\\|map\\|default\\|relation\\|unique\\|index\\|ignore\\)")
+             (x-block-attributes-regexp "\@@\\(id\\|map\\|unique\\|index\\|ignore\\|fulltext\\)")
              ;; A native type definition, such as `@db.VarChar(255)'
              (x-native-types-regexp "\@[a-zA-Z0-9_-]+\.[a-zA-Z]+")
              ;; Properties in an attribute, e.g. `fields: [MediaTypeId]'.
@@ -57,6 +73,9 @@
 
   (setq-default indent-tabs-mode nil)
   (setq tab-width 2)
+  (setq c-basic-offset 2)
+  (setq c-syntactic-indentation nil)
+  (setq js-indent-level 2)
   (setq font-lock-defaults '((prisma-font-lock-keywords))))
 
 ;;;###autoload
