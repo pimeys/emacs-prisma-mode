@@ -76,6 +76,8 @@
   (setq c-basic-offset 2)
   (setq c-syntactic-indentation nil)
   (setq js-indent-level 2)
+  ;; HACK: dont indent after <type>[?!]
+  (setq-local js--indent-operator-re "")
   (setq font-lock-defaults '((prisma-font-lock-keywords))))
 
 ;;;###autoload
