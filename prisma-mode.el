@@ -67,6 +67,23 @@
           (,x-constants-regexp . font-lock-constant-face)
           )))
 
+(defun prisma-format-buffer ()
+  "Run prisma format on current prisma buffer.
+Attempts to find prisma by searching up directory tree for package.json and
+associated node_modules/.bin/prisma."
+  (interactive)
+  (let* ((buf (buffer-file-name))
+         (pkg (and buf (locate-dominating-file buf "package.json")))
+         (prisma (and pkg (expand-file-name "node_modules/.bin/prisma" pkg))))
+    (if (and prisma (file-exists-p prisma))
+        (shell-command (concat prisma " format --schema=" buf))
+      (message "prisma not found"))))
+
+(defvar prisma-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c C-c") #'prisma-format-buffer)
+    map))
+
 ;;;###autoload
 (define-derived-mode prisma-mode js-mode "Prisma"
   "Major mode for editing Prisma data models."
@@ -78,7 +95,9 @@
   (setq js-indent-level 2)
   ;; HACK: dont indent after <type>[?!]
   (setq-local js--indent-operator-re "")
-  (setq font-lock-defaults '((prisma-font-lock-keywords))))
+  (setq font-lock-defaults '((prisma-font-lock-keywords)))
+  (setq-local imenu-generic-expression
+              '((nil "^\\s-*\\(?:model\\|enum\\)\\s-+\\([[:alnum:]]+\\)\\s-*{" 1))))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.prisma$" . prisma-mode))
