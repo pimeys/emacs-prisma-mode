@@ -78,7 +78,12 @@
   (setq js-indent-level 2)
   ;; HACK: dont indent after <type>[?!]
   (setq-local js--indent-operator-re "")
-  (setq font-lock-defaults '((prisma-font-lock-keywords))))
+  (setq font-lock-defaults '((prisma-font-lock-keywords)))
+  (when (eq (bound-and-true-p imenu-create-index-function) 'js--imenu-create-index)
+    (setq-local imenu-generic-expression
+                '((nil "^\\s-*\\(?:model\\|enum\\)\\s-+\\([[:alnum:]]+\\)\\s-*{" 1)))
+    (add-function :before-until (local 'imenu-create-index-function)
+                  #'imenu-default-create-index-function)))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.prisma$" . prisma-mode))
