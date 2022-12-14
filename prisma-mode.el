@@ -32,8 +32,9 @@
 
 ;;; Code:
 
-(when (require 'lsp-mode nil 'noerror)
-	(require 'lsp-prisma))
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(prisma-mode . ("prisma-language-server"))))
 
 (setq prisma-font-lock-keywords
       (let* (
@@ -46,7 +47,7 @@
              (x-field-attributes-regexp "\@\\(id\\|map\\|default\\|relation\\|unique\\|ignore\\)")
              ;; A block attribute, usually at the end of a block such as model definition.
              ;; Example: `@@id([user_name, email])'
-             (x-block-attributes-regexp "\@@\\(id\\|map\\|unique\\|index\\|ignore\\|fulltext\\)")
+             (x-block-attributes-regexp "\@@\\(id\\|map\\|unique\\|index\\|ignore\\|fulltext\\|schema)")
              ;; A native type definition, such as `@db.VarChar(255)'
              (x-native-types-regexp "\@[a-zA-Z0-9_-]+\.[a-zA-Z]+")
              ;; Properties in an attribute, e.g. `fields: [MediaTypeId]'.
