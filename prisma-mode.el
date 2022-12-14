@@ -34,7 +34,7 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(prisma-mode . ("prisma-language-server"))))
+               '(prisma-mode . ("prisma-language-server" "--stdio"))))
 
 (setq prisma-font-lock-keywords
       (let* (
