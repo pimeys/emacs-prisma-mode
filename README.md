@@ -23,6 +23,15 @@ Or, you can also install as package at `~/.doom.d/packages.el`
 ```elisp
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 ```
+
+Or, you can [use-package](https://github.com/jwiegley/use-package) and [quelpa-use-package](https://github.com/quelpa/quelpa-use-package)
+
+```elisp
+(use-package prisma-mode
+  :quelpa (prisma-mode :fetcher github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+```
+
+
 Note: This package requires [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
 
 ```elisp
