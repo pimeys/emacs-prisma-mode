@@ -18,6 +18,8 @@
 
 ;;; Commentary:
 
+;;; Description:
+
 ;;; Syntax highlight and LSP functionality for the Prisma Schema Language. Using
 ;;; the LSP functionality requires the npm package @prisma/language-server to
 ;;; be installed in the system, providing prisma-language-server somewhere in

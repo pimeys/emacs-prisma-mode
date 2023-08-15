@@ -15,7 +15,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  Description
+;;; Description:
 ;;
 ;;; Code:
 
