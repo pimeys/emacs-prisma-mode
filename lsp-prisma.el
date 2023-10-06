@@ -26,6 +26,9 @@
   :group 'lsp-mode
   :link '(url-link "https://github.com/pimeys/emacs-prisma-mode"))
 
+(defvar prisma-modes '(prisma-mode prisma-ts-mode)
+  "Prisma modes to associate with server.")
+
 (lsp-dependency 'prisma-language-server
                 '(:system "prisma-language-server")
                 '(:npm :package "@prisma/language-server"
@@ -35,7 +38,7 @@
  (make-lsp-client :new-connection (lsp-stdio-connection  (lambda ()
                      `(,(lsp-package-path 'prisma-language-server)
                        "--stdio"))) 
-                  :major-modes '(prisma-mode)
+                  :major-modes prisma-modes
                   :server-id 'prismals
                   :activation-fn (lambda (file-name _mode)
                    (string= (f-ext file-name)
@@ -44,9 +47,10 @@
                                         (lsp-package-ensure
                                          'prisma-language-server
                                          callback
-                                         error-callback))
-                                         ))
-(add-to-list 'lsp-language-id-configuration '(prisma-mode . "prisma"))
+                                         error-callback))))
+
+(dolist (mode prisma-modes)
+  (add-to-list 'lsp-language-id-configuration `(,mode . "prisma")))
 
 (provide 'lsp-prisma)
 ;;; lsp-prisma.el ends here
